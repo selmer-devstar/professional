@@ -1,0 +1,684 @@
+/*
+  Shared site styles — Steve Elmer
+  Built on design-tokens.css. Keeps the established palette (navy / blue /
+  accent / light / muted / white) but trades the generic SaaS-template
+  layout for an editorial, "release notes" treatment: a dark asymmetric
+  hero and a changelog-style experience log as the signature element.
+*/
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   var(--color-text);
+  --blue:   var(--color-accent-hover);
+  --accent: var(--color-accent);
+  --light:  var(--color-bg-alt);
+  --muted:  var(--color-text-muted);
+  --white:  var(--color-bg);
+  --radius: var(--radius-lg);
+  --radius-sm: var(--radius);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--light);
+  color: var(--navy);
+  line-height: 1.65;
+}
+
+h1, h2, h3 { font-family: var(--font-heading); }
+
+a { color: inherit; }
+
+img, svg { display: block; }
+
+::selection { background: var(--accent); color: var(--white); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── UTILITY: eyebrow / mono labels ─────────────────────── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.cursor {
+  display: inline-block;
+  width: .55em;
+  margin-left: .1em;
+  border-bottom: 2px solid currentColor;
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ── SCROLL REVEAL ───────────────────────────────────────── */
+/* Visible by default (no-JS / JS-failure safe). JS adds .reveal-armed
+   before observing, which is the only thing that opts an element into
+   the hidden-then-fade-in animation. */
+.reveal { transition: opacity .6s ease, transform .6s ease; }
+.reveal.reveal-armed { opacity: 0; transform: translateY(14px); }
+.reveal.reveal-armed.is-visible { opacity: 1; transform: none; }
+
+/* ── NAV ─────────────────────────────────────────────────── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e3e8f0;
+}
+
+.nav-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.nav-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.nav-mark .nav-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: 1.5px solid var(--navy);
+  background: var(--navy);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  transition: background .2s, color .2s;
+}
+
+.nav-mark:hover .nav-badge {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .3px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+
+.nav-links a:hover { color: var(--navy); }
+
+.nav-links a.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* Clips the decorative dot-grid + glow, but not .stat-rail — that needs
+   to overflow the band below so it can overlap the light section without
+   being cut off (it's a sibling of hero-band, not a child). */
+.hero-band {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.65) 0%, transparent 78%);
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.65) 0%, transparent 78%);
+}
+
+/* ::before, not ::after — pseudo-elements paint in DOM order, and this
+   needs to sit behind hero-inner's text, not on top of it (::after would
+   paint after/above the real children and can wash out headline text
+   that reaches into its bounds). */
+.hero-band::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 60%;
+  height: 140%;
+  background: radial-gradient(closest-side, rgba(45,125,210,.35), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 88px 24px 48px;
+}
+
+.hero .eyebrow { color: var(--accent-light, #7fb3ef); }
+
+.hero h1 {
+  margin-top: 18px;
+  max-width: 16ch;
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: var(--white);
+}
+
+.hero-sub {
+  margin-top: 20px;
+  max-width: 46ch;
+  font-size: 1.08rem;
+  color: rgba(255,255,255,.72);
+  line-height: 1.65;
+}
+
+.hero-actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary, .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform .15s ease, background .2s, border-color .2s, opacity .2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+}
+.btn-primary:hover { transform: translateY(-1px); background: #4c96e0; }
+
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,.3);
+  color: var(--white);
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,.7); transform: translateY(-1px); }
+
+/* ── STAT RAIL ───────────────────────────────────────────── */
+/* Sits outside .hero-band so its bottom half, pushed down by the
+   transform below, isn't clipped by the band's overflow:hidden. */
+.stat-rail {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  transform: translateY(50%);
+}
+
+.stat-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid #e3e8f0;
+  padding: 18px 16px;
+  text-align: left;
+}
+
+.stat-copy {
+  display: flex;
+  flex-direction: column;
+}
+.stat-cell:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.stat-cell:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+.stat-cell + .stat-cell { border-left: none; }
+
+.stat-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--accent);
+  stroke-width: 2px;
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+
+/* Modifier for cells carrying a full phrase instead of a short label
+   (e.g. "Human-Centered Design") — keeps the row's height in check. */
+.stat-num--text {
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .stat-rail { grid-template-columns: repeat(2, 1fr); }
+  .stat-cell:first-child { border-radius: var(--radius) 0 0 0; }
+  .stat-cell:nth-child(2) { border-radius: 0 var(--radius) 0 0; }
+  .stat-cell:nth-child(3) { border-radius: 0 0 0 var(--radius); border-left: 1px solid #e3e8f0; border-top: none; }
+  .stat-cell:last-child { border-radius: 0 0 var(--radius) 0; border-top: none; }
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────── */
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 96px 24px 80px;
+}
+
+.layout-split {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.col { display: flex; flex-direction: column; gap: 24px; }
+
+@media (max-width: 760px) {
+  .layout-split { grid-template-columns: 1fr; }
+}
+
+/* ── CARDS ───────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: 0 2px 14px rgba(15,27,45,.06);
+  border: 1px solid #edf1f6;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+
+.card h2 {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--accent);
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card h2 .count {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.card > p, .bio p {
+  font-size: 1.02rem;
+  color: #2c3e50;
+  line-height: 1.8;
+}
+.bio p + p, .card > p + p { margin-top: 14px; }
+
+.mb { margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px;
+  background: var(--light); border: 1px solid #d8e4f0; border-radius: 999px;
+  padding: 6px 16px; font-size: .82rem; font-weight: 600; color: var(--blue); }
+
+/* ── CHANGELOG / EXPERIENCE LOG (signature element) ─────── */
+.log { display: flex; flex-direction: column; }
+
+.entry {
+  padding: 22px 0;
+  border-top: 1px dashed #dde5ee;
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 20px;
+}
+.entry:first-child { border-top: none; padding-top: 0; }
+
+.entry-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.entry-date {
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+
+.entry-tag {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--color-bg-tint);
+  border: 1px solid #cfe0f7;
+  border-radius: 5px;
+  padding: 3px 8px;
+}
+
+.entry-title { font-size: 1.05rem; font-weight: 700; }
+.entry-context {
+  font-size: .84rem;
+  color: var(--muted);
+  margin-top: 2px;
+  margin-bottom: 12px;
+}
+
+.entry-diff { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.entry-diff li {
+  font-size: .92rem;
+  color: #37485c;
+  line-height: 1.55;
+  padding-left: 1.4em;
+  position: relative;
+}
+.entry-diff li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #2f9e5c;
+}
+
+@media (max-width: 560px) {
+  .entry { grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ── FOCUS AREAS ─────────────────────────────────────────── */
+.focus-list { display: flex; flex-direction: column; gap: 18px; }
+.focus-item { }
+.focus-name {
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.focus-evidence {
+  margin-top: 3px;
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── PILLS ───────────────────────────────────────────────── */
+.pill-group { display: flex; flex-wrap: wrap; gap: 9px; }
+
+.pill {
+  font-family: var(--font-mono);
+  background: var(--white);
+  border: 1px solid #d0dce9;
+  border-radius: 6px;
+  padding: 5px 11px;
+  font-size: .74rem;
+  font-weight: 500;
+  color: var(--blue);
+  transition: border-color .2s, color .2s, background .2s;
+}
+.pill:hover { border-color: var(--accent); color: var(--accent); background: var(--color-bg-tint); }
+
+/* ── PHILOSOPHY ──────────────────────────────────────────── */
+.philosophy blockquote {
+  position: relative;
+  font-size: 1.02rem;
+  font-style: italic;
+  color: #3a4f66;
+  border-left: 3px solid var(--accent);
+  padding-left: 18px;
+  line-height: 1.75;
+}
+
+/* ── SIMPLE LIST ─────────────────────────────────────────── */
+.plain-list {
+  padding-left: 0;
+  list-style: none;
+  font-size: .9rem;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.plain-list li { padding-left: 1.2em; position: relative; }
+.plain-list li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── INTEREST GRID (about page) ──────────────────────────── */
+.interest {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-top: 1px dashed #dde5ee;
+}
+.interest:first-child { border-top: none; padding-top: 0; }
+
+.interest-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.interest-body h3 { font-size: .98rem; font-weight: 700; }
+.interest-body .interest-meta {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .03em;
+  color: var(--muted);
+  margin-top: 3px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.interest-body p { font-size: .9rem; color: #444; line-height: 1.6; }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 32px 24px 40px;
+  font-size: .8rem;
+  color: var(--muted);
+}
+footer .foot-sub {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: #a7b3c2;
+}
+
+/* ── PROJECT TIMELINE (projects.html signature element) ─────
+   A vertical rail with a dot per project and an accent "read"
+   line that fills in as the page scrolls (see the small script
+   in projects.html) — the chronological, interactive counterpart
+   to the changelog used on the Experience section. */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.timeline-spine {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 14px;
+  width: 2px;
+  background: #e2e8f0;
+  border-radius: 1px;
+}
+
+.timeline-spine-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  column-gap: 20px;
+}
+
+.timeline-dot {
+  grid-column: 1;
+  justify-self: center;
+  position: relative;
+  z-index: 2;
+  width: 14px;
+  height: 14px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--accent);
+}
+
+.timeline-card {
+  background: var(--white);
+  border: 1px solid #edf1f6;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(15, 27, 45, .06);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(15, 27, 45, .1);
+}
+
+.timeline-media {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+  background: var(--light);
+  border-bottom: 1.5px dashed #d5e0eb;
+  color: var(--muted);
+  transition: color .2s ease, background .2s ease;
+}
+
+.timeline-media span {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  line-height: 1.5;
+  max-width: 32ch;
+}
+
+.timeline-card:hover .timeline-media {
+  color: var(--accent);
+  background: var(--color-bg-tint);
+}
+
+.timeline-body {
+  padding: 20px 22px 22px;
+}
+
+.timeline-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.timeline-desc {
+  margin-top: 8px;
+  font-size: .92rem;
+  color: #37485c;
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  .timeline-item { grid-template-columns: 20px 1fr; column-gap: 14px; }
+  .timeline-spine { left: 10px; }
+}

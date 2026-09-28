@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Steve Elmer</title>
+  <link rel="stylesheet" href="design-tokens.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://unpkg.com/lucide@1.41.0/dist/umd/lucide.js"></script>
+  <style>
+    main { max-width: 700px; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-mark">
+      <span class="nav-badge">SE</span>
+      Steve Elmer
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-band">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-inner" style="padding-bottom: 64px;">
+      <p class="eyebrow">// Projects<span class="cursor" aria-hidden="true"></span></p>
+      <h1 style="max-width: 20ch;">Highlights of what I've shipped.</h1>
+      <p class="hero-sub">
+        A chronological look at my product work. What launched and why it
+        mattered.
+      </p>
+    </div>
+  </div>
+</header>
+
+<main class="col" style="gap: 24px; padding-top: 56px;">
+
+  <div class="card reveal">
+    <h2>Projects <span class="count">timeline</span></h2>
+
+    <div class="timeline" id="timeline">
+      <div class="timeline-spine" aria-hidden="true">
+        <div class="timeline-spine-fill" id="timelineFill"></div>
+      </div>
+
+      <!-- TODO: swap each placeholder image for a real screenshot at the
+           path noted in its caption, then delete the "placeholder-media"
+           class and swap the <div> for an <img>. -->
+
+      <article class="timeline-item reveal">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <div class="timeline-card">
+          <div class="timeline-media placeholder-media">
+            <i data-lucide="image" width="20" height="20" aria-hidden="true"></i>
+            <span>Add image — assets/img/projects/hiring-agent.jpg</span>
+          </div>
+          <div class="timeline-body">
+            <div class="timeline-meta">
+              <span class="entry-date">Date TBD</span>
+              <span class="entry-tag">Project</span>
+            </div>
+            <h3 class="entry-title">Hiring Agent</h3>
+            <p class="entry-context">Add company / context here</p>
+            <p class="timeline-desc">Add a 1–2 sentence description — what it is, your role, and the outcome.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <div class="timeline-card">
+          <div class="timeline-media placeholder-media">
+            <i data-lucide="image" width="20" height="20" aria-hidden="true"></i>
+            <span>Add image — assets/img/projects/payroll-wage-determination.jpg</span>
+          </div>
+          <div class="timeline-body">
+            <div class="timeline-meta">
+              <span class="entry-date">Date TBD</span>
+              <span class="entry-tag">Project</span>
+            </div>
+            <h3 class="entry-title">Payroll – Wage Determination</h3>
+            <p class="entry-context">Add company / context here</p>
+            <p class="timeline-desc">Add a 1–2 sentence description — what it is, your role, and the outcome.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <div class="timeline-card">
+          <div class="timeline-media placeholder-media">
+            <i data-lucide="image" width="20" height="20" aria-hidden="true"></i>
+            <span>Add image — assets/img/projects/ai-assistant.jpg</span>
+          </div>
+          <div class="timeline-body">
+            <div class="timeline-meta">
+              <span class="entry-date">2021 — Present</span>
+              <span class="entry-tag">Shipped</span>
+            </div>
+            <h3 class="entry-title">AI Assistant</h3>
+            <p class="entry-context">Arcoro — integrated HCM platform for construction</p>
+            <p class="timeline-desc">Designed, tested, and launched an AI assistant for HR admins that strengthened data compliance and task efficiency.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 Steve Elmer &mdash; Principal Product Manager
+  <div class="foot-sub">designed &amp; built with Claude Code</div>
+</footer>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('reveal-armed');
+      io.observe(el);
+    });
+  }
+
+  if (window.lucide) { lucide.createIcons(); }
+
+  // Fills the timeline's accent "read" line as the viewport scrolls
+  // through it — 0% when the rail first enters view, 100% once it's
+  // scrolled past.
+  (function () {
+    var rail = document.getElementById('timeline');
+    var fill = document.getElementById('timelineFill');
+    if (!rail || !fill) return;
+    var ticking = false;
+    function update() {
+      var rect = rail.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var progress = (vh - rect.top) / (rect.height + vh);
+      progress = Math.max(0, Math.min(1, progress));
+      fill.style.height = (progress * 100) + '%';
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+  })();
+</script>
+
+</body>
+</html>

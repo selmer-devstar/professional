@@ -1,0 +1,117 @@
+/*
+  Design tokens — B2B SaaS style
+  Colors: Modern minimal / navy-blue
+  Fonts: Sora (headings) + Inter (body)
+
+  Usage: import this file first in your global stylesheet, e.g.
+    @import "./design-tokens.css";
+  Then reference the variables below throughout your CSS.
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* Colors */
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F8FAFC;      /* section background variation */
+  --color-bg-tint: #EFF6FF;     /* card / hover / callout background */
+  --color-text: #0F172A;        /* primary text, headings */
+  --color-text-muted: #64748B;  /* secondary text, captions */
+  --color-border: #E2E8F0;
+
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-text: #2563EB; /* for links on light backgrounds */
+
+  /* Fonts */
+  --font-heading: "Sora", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace; /* eyebrows, tags, meta — the engineering-fluency accent voice */
+
+  /* Type scale (adjust to taste) */
+  --text-xs: 0.75rem;   /* 12px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.5rem;    /* 24px */
+  --text-2xl: 2rem;     /* 32px */
+  --text-3xl: 2.75rem;  /* 44px */
+
+  /* Spacing (8px base) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+/* Base element styles */
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+
+p {
+  color: var(--color-text-muted);
+}
+
+a {
+  color: var(--color-accent-text);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+button, .btn {
+  font-family: var(--font-body);
+  font-weight: 500;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+button:hover, .btn:hover {
+  background: var(--color-accent-hover);
+}
+
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+}
+
+.section-alt {
+  background: var(--color-bg-alt);
+}
+
+.tint {
+  background: var(--color-bg-tint);
+}

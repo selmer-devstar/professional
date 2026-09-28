@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Steve Elmer — AI-Focused Product Leader</title>
+  <link rel="stylesheet" href="design-tokens.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://unpkg.com/lucide@1.41.0/dist/umd/lucide.js"></script>
+  <style>
+    main { max-width: 700px; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-mark">
+      <span class="nav-badge">SE</span>
+      Steve Elmer
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About Me</a></li>
+      <li><a href="projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-band">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-inner" style="padding-bottom: 64px;">
+      <p class="eyebrow">// About<span class="cursor" aria-hidden="true"></span></p>
+      <h1 style="max-width: 20ch;">The same curiosity, off the clock.</h1>
+      <p class="hero-sub">
+        What I look for in a rally, a trail, or a book isn't so different from
+        what I look for in a product.
+      </p>
+    </div>
+  </div>
+</header>
+
+<main class="col" style="gap: 24px; padding-top: 56px;">
+
+  <!-- Bio -->
+  <div class="card bio reveal">
+    <h2>About Me</h2>
+    <p>
+      I spend most of my working hours thinking about how to build products people actually
+      want to use — but the same habits show up away from work, too. I like problems with a
+      clear feedback loop: a rally you can adjust mid-point, a trail that rewards a slightly
+      different pace, a book that reframes something you thought you already understood.
+    </p>
+    <p>
+      Outside of product strategy and roadmaps, that curiosity plays out on the tennis court,
+      on foot outdoors, and in whatever I'm reading next.
+    </p>
+  </div>
+
+  <!-- People & Organizations -->
+  <div class="card reveal">
+    <h2>How People and Teams Work</h2>
+    <p>
+      The part of product work I find most interesting isn't the software. It's the people
+      building it and the people using it. I've come to think that most product problems
+      are really organizational or human problems underneath. Three fields shape how I
+      approach them.
+    </p>
+
+    <div class="interest" style="margin-top: 20px;">
+      <div class="interest-icon" style="color: var(--accent);"><i data-lucide="network" width="22" height="22"></i></div>
+      <div class="interest-body">
+        <h3>Organizational Development</h3>
+        <div class="interest-meta">How teams change</div>
+        <p>Rolling out a new tool is easy compared with changing how a team works. I'm drawn
+        to the enablement side of that: finding where the workflows are stuck, working out
+        what a team needs in order to adopt something new, and designing the change so it
+        holds after launch. That's the lens I bring to embedding AI into how organizations
+        work.</p>
+      </div>
+    </div>
+
+    <div class="interest">
+      <div class="interest-icon" style="color: var(--accent);"><i data-lucide="pen-tool" width="22" height="22"></i></div>
+      <div class="interest-body">
+        <h3>Design</h3>
+        <div class="interest-meta">Human-centered by default</div>
+        <p>Design Thinking gave me a repeatable way to start from the person rather than
+        the feature list: observe, frame the real problem, prototype, and test before
+        committing. I apply the same process to internal processes and team rituals as I
+        do to product interfaces.</p>
+      </div>
+    </div>
+
+    <div class="interest">
+      <div class="interest-icon" style="color: var(--accent);"><i data-lucide="brain" width="22" height="22"></i></div>
+      <div class="interest-body">
+        <h3>Psychology</h3>
+        <div class="interest-meta">Why people do what they do</div>
+        <p>Motivation, habit, trust, resistance to change. These explain why a good product
+        goes unused, or a sound strategy stalls, more often than anything technical does.
+        Understanding them helps me write better requirements, run better conversations
+        with stakeholders, and set up AI adoption so people actually want to take part.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interests -->
+  <div class="card reveal">
+    <h2>Personal Interests</h2>
+
+    <div class="interest">
+      <div class="interest-icon">🎾</div>
+      <div class="interest-body">
+        <h3>Tennis</h3>
+        <div class="interest-meta">Weekend player</div>
+        <p>A regular match keeps competitive instincts sharp — reading an opponent's patterns,
+        adjusting strategy point by point, and improving one rally at a time.</p>
+      </div>
+    </div>
+
+    <div class="interest">
+      <div class="interest-icon">🥾</div>
+      <div class="interest-body">
+        <h3>Outdoors</h3>
+        <div class="interest-meta">Hiking &amp; time outside</div>
+        <p>Time outside is where I reset and think clearly. Some of the best product ideas
+        surface a few miles into a trail, away from a screen.</p>
+      </div>
+    </div>
+
+    <div class="interest">
+      <div class="interest-icon">📚</div>
+      <div class="interest-body">
+        <h3>Reading</h3>
+        <div class="interest-meta">Steady habit, wide range</div>
+        <p>A mix of product, leadership, and technology reading, plus fiction to stay curious
+        about how people and stories work — habits that carry straight back into the job.</p>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 Steve Elmer &mdash; Principal Product Manager
+  <div class="foot-sub">designed &amp; built with Claude Code</div>
+</footer>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('reveal-armed');
+      io.observe(el);
+    });
+  }
+
+  if (window.lucide) { lucide.createIcons(); }
+</script>
+
+</body>
+</html>
