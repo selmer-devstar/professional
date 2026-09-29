@@ -298,16 +298,9 @@ img, svg { display: block; }
 .stat-num {
   display: block;
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--navy);
-  line-height: 1;
-}
-
-/* Modifier for cells carrying a full phrase instead of a short label
-   (e.g. "Human-Centered Design") — keeps the row's height in check. */
-.stat-num--text {
-  font-size: 1.05rem;
   line-height: 1.2;
 }
 
