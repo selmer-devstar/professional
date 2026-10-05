@@ -33,7 +33,7 @@ Established in `index.html` and shared via `assets/css/style.css` — reuse and 
 
 - **Font:** Sora (headings) + Inter (body), plus JetBrains Mono as a utility face for eyebrows/tags/meta only (the "engineering-fluency" accent — nods to Claude Code without overusing it). Don't add further faces.
 - **Layout:** a dark asymmetric hero (dot-grid texture, a stat rail straddling the hero/page boundary) leading into card-based sections — generous whitespace, rounded corners (`--radius: 12px`), soft shadows. The signature element is the experience section styled as a changelog (dated entries, status tags, git-diff-style `+` outcome lines) rather than a generic bullet list — keep this consistent across new pages rather than reverting to plain resume-style cards.
-- **Project timeline** (`projects.html`, `.timeline` in `style.css`): a chronological, image-forward variant of the changelog — a vertical rail with a dot per project and an accent line that fills in as the page scrolls (plain JS, no library). Each entry gets an image slot (a dashed placeholder until a real screenshot exists at `assets/img/projects/<slug>.jpg` — swap the `<div class="timeline-media placeholder-media">` for an `<img>` and drop the class) plus reused `.entry-date` / `.entry-tag` / `.entry-context` styling for meta, so it still reads as the same voice as the Experience changelog.
+- **Project timeline** (`projects.html`, `.timeline` in `style.css`): an image-forward variant of the changelog, organized by product area (AI, HCM, Mobile, Enablement) — a vertical rail with a dot per area, the area's individual projects listed as `.entry-diff` `+` lines and an accent line that fills in as the page scrolls (plain JS, no library). Each entry gets an image slot (`<img class="timeline-media">`, currently unDraw illustrations at `assets/img/projects/<slug>.svg` recolored from unDraw's default `#6c63ff` to `--accent`; swap for real product screenshots as they become available) plus reused `.entry-date` / `.entry-tag` / `.entry-context` styling for meta, so it still reads as the same voice as the Experience changelog.
 
 ## Tech approach
 
@@ -50,7 +50,7 @@ Small static multi-page site. No framework, no SPA, no backend.
 ```
 index.html          - landing / home (done)
 about.html           - background, philosophy (done)
-projects.html        - chronological project timeline with images (done; 2 of 3 entries have placeholder copy/images pending from Steve)
+projects.html        - product-area timeline (AI, HCM, Mobile, Enablement) with unDraw illustrations (done; most copy pending from Steve)
 experience.html      - role history, case studies
 ai-leadership.html   - AI enablement & transformation focus (new positioning beyond index.html's PM angle)
 contact.html

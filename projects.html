@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects — Steve Elmer</title>
+  <title>Work — Steve Elmer</title>
   <link rel="stylesheet" href="design-tokens.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <script src="https://unpkg.com/lucide@1.41.0/dist/umd/lucide.js"></script>
   <style>
     main { max-width: 700px; }
+    .timeline-body .entry-diff { margin-top: 14px; }
+    .timeline-body .pill-group { margin-top: 16px; }
   </style>
 </head>
 <body>
@@ -22,7 +24,7 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Me</a></li>
-      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="projects.html" class="active">Work</a></li>
     </ul>
   </div>
 </nav>
@@ -31,11 +33,11 @@
   <div class="hero-band">
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-inner" style="padding-bottom: 64px;">
-      <p class="eyebrow">// Projects<span class="cursor" aria-hidden="true"></span></p>
-      <h1 style="max-width: 20ch;">Highlights of what I've shipped.</h1>
+      <p class="eyebrow">// Work<span class="cursor" aria-hidden="true"></span></p>
+      <h1 style="max-width: 20ch;">Products, platforms, and the teams behind them.</h1>
       <p class="hero-sub">
-        A chronological look at my product work. What launched and why it
-        mattered.
+        The product areas I've owned, and what shipped in each. What
+        launched and why it mattered.
       </p>
     </div>
   </div>
@@ -44,70 +46,99 @@
 <main class="col" style="gap: 24px; padding-top: 56px;">
 
   <div class="card reveal">
-    <h2>Projects <span class="count">timeline</span></h2>
+    <h2>Product areas <span class="count">4 areas</span></h2>
 
     <div class="timeline" id="timeline">
       <div class="timeline-spine" aria-hidden="true">
         <div class="timeline-spine-fill" id="timelineFill"></div>
       </div>
 
-      <!-- TODO: swap each placeholder image for a real screenshot at the
-           path noted in its caption, then delete the "placeholder-media"
-           class and swap the <div> for an <img>. -->
+      <!-- Images are unDraw illustrations recolored to --accent; swap for
+           real product screenshots as they become available. -->
 
       <article class="timeline-item reveal">
         <span class="timeline-dot" aria-hidden="true"></span>
         <div class="timeline-card">
-          <div class="timeline-media placeholder-media">
-            <i data-lucide="image" width="20" height="20" aria-hidden="true"></i>
-            <span>Add image — assets/img/projects/hiring-agent.jpg</span>
-          </div>
+          <img class="timeline-media" src="assets/img/projects/ai.svg" alt="Illustration of an AI agent" loading="lazy" />
           <div class="timeline-body">
-            <div class="timeline-meta">
-              <span class="entry-date">Date TBD</span>
-              <span class="entry-tag">Project</span>
-            </div>
-            <h3 class="entry-title">Hiring Agent</h3>
-            <p class="entry-context">Add company / context here</p>
-            <p class="timeline-desc">Add a 1–2 sentence description — what it is, your role, and the outcome.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="timeline-item reveal">
-        <span class="timeline-dot" aria-hidden="true"></span>
-        <div class="timeline-card">
-          <div class="timeline-media placeholder-media">
-            <i data-lucide="image" width="20" height="20" aria-hidden="true"></i>
-            <span>Add image — assets/img/projects/payroll-wage-determination.jpg</span>
-          </div>
-          <div class="timeline-body">
-            <div class="timeline-meta">
-              <span class="entry-date">Date TBD</span>
-              <span class="entry-tag">Project</span>
-            </div>
-            <h3 class="entry-title">Payroll – Wage Determination</h3>
-            <p class="entry-context">Add company / context here</p>
-            <p class="timeline-desc">Add a 1–2 sentence description — what it is, your role, and the outcome.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="timeline-item reveal">
-        <span class="timeline-dot" aria-hidden="true"></span>
-        <div class="timeline-card">
-          <div class="timeline-media placeholder-media">
-            <i data-lucide="image" width="20" height="20" aria-hidden="true"></i>
-            <span>Add image — assets/img/projects/ai-assistant.jpg</span>
-          </div>
-          <div class="timeline-body">
-            <div class="timeline-meta">
-              <span class="entry-date">2021 — Present</span>
-              <span class="entry-tag">Shipped</span>
-            </div>
-            <h3 class="entry-title">AI Assistant</h3>
+            <h3 class="entry-title">AI</h3>
             <p class="entry-context">Arcoro — integrated HCM platform for construction</p>
-            <p class="timeline-desc">Designed, tested, and launched an AI assistant for HR admins that strengthened data compliance and task efficiency.</p>
+            <p class="timeline-desc">AI products embedded in the HCM platform — from an admin-facing assistant to agentic hiring workflows.</p>
+            <div class="pill-group">
+              <span class="pill">AI / LLM Products</span>
+              <span class="pill">Design Thinking</span>
+              <span class="pill">User Research</span>
+              <span class="pill">B2B SaaS</span>
+            </div>
+            <ul class="entry-diff">
+              <li>Hiring re-engagement agent — add a one-line outcome</li>
+              <li>HR assistant — designed, tested, and launched an assistant for HR admins that strengthened data compliance and task efficiency</li>
+              <li>ATS workflow automation — add a one-line outcome</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <div class="timeline-card">
+          <img class="timeline-media" src="assets/img/projects/hcm.svg" alt="Illustration of an HR presentation" loading="lazy" />
+          <div class="timeline-body">
+            <h3 class="entry-title">HCM</h3>
+            <p class="entry-context">Add company / context here</p>
+            <p class="timeline-desc">Add a 1–2 sentence summary of the area — scope, your role, and the outcome.</p>
+            <div class="pill-group">
+              <span class="pill">B2B SaaS</span>
+              <span class="pill">Product Strategy &amp; Vision</span>
+              <span class="pill">Roadmap Leadership</span>
+              <span class="pill">Customer Discovery</span>
+            </div>
+            <ul class="entry-diff">
+              <li>Payroll – Wage Determination — add a one-line outcome</li>
+              <li>Add another shipped project or outcome</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <div class="timeline-card">
+          <img class="timeline-media" src="assets/img/projects/mobile.svg" alt="Illustration of a mobile application" loading="lazy" />
+          <div class="timeline-body">
+            <h3 class="entry-title">Mobile</h3>
+            <p class="entry-context">Add company / context here</p>
+            <p class="timeline-desc">Add a 1–2 sentence summary of the area — scope, your role, and the outcome.</p>
+            <div class="pill-group">
+              <span class="pill">Design Thinking</span>
+              <span class="pill">User Research</span>
+              <span class="pill">Customer Discovery</span>
+            </div>
+            <ul class="entry-diff">
+              <li>Add a shipped project or outcome</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <div class="timeline-card">
+          <img class="timeline-media" src="assets/img/projects/enablement.svg" alt="Illustration of a team collaborating" loading="lazy" />
+          <div class="timeline-body">
+            <h3 class="entry-title">Enablement</h3>
+            <p class="entry-context">Add company / context here</p>
+            <p class="timeline-desc">Add a 1–2 sentence summary of the area — scope, your role, and the outcome.</p>
+            <div class="pill-group">
+              <span class="pill">Claude Code</span>
+              <span class="pill">Claude Cowork</span>
+              <span class="pill">Cross-Functional Leadership</span>
+              <span class="pill">Stakeholder Alignment</span>
+              <span class="pill">Systems Thinking</span>
+            </div>
+            <ul class="entry-diff">
+              <li>Add a shipped project or outcome</li>
+            </ul>
           </div>
         </div>
       </article>

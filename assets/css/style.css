@@ -648,6 +648,12 @@ footer .foot-sub {
   max-width: 32ch;
 }
 
+img.timeline-media {
+  object-fit: contain;
+  padding: 24px 32px;
+  border-bottom-style: solid;
+}
+
 .timeline-card:hover .timeline-media {
   color: var(--accent);
   background: var(--color-bg-tint);
