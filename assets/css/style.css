@@ -379,6 +379,31 @@ main {
 }
 .bio p + p, .card > p + p { margin-top: 14px; }
 
+/* Expandable section inside a card (native <details>) */
+.disclosure {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--light);
+}
+.disclosure summary {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--accent);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.disclosure summary::-webkit-details-marker { display: none; }
+.disclosure summary svg { transition: transform .2s ease; }
+.disclosure:not([open]) summary svg { transform: rotate(-90deg); }
+.disclosure[open] summary { margin-bottom: 16px; }
+.disclosure summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
 .mb { margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px;
   background: var(--light); border: 1px solid #d8e4f0; border-radius: 999px;
   padding: 6px 16px; font-size: .82rem; font-weight: 600; color: var(--blue); }
