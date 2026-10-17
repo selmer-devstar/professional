@@ -379,6 +379,23 @@ main {
 }
 .bio p + p, .card > p + p { margin-top: 14px; }
 
+/* Small round headshot tucked beside the About Me bio */
+.bio { display: flow-root; }
+.bio-portrait {
+  float: right;
+  width: 120px;
+  height: 120px;
+  margin: 4px 0 12px 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 1px #d8e4f0, 0 4px 14px rgba(15,27,45,.08);
+}
+@media (max-width: 520px) {
+  .bio-portrait { width: 88px; height: 88px; margin-left: 16px; }
+}
+
 /* Expandable section inside a card (native <details>) */
 .disclosure {
   margin-top: 24px;
